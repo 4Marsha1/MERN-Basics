@@ -1,0 +1,19 @@
+.nav{
+    width: 80%;
+    background-color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 1rem;
+}
+.text{
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: black
+}
+.svg{
+    height: 50px;
+    width: 50px;
+}

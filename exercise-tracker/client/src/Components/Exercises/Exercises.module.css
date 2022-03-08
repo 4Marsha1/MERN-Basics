@@ -1,0 +1,38 @@
+.exercises{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem 4rem;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 2px solid orangered;
+    border-radius: 0.7rem;
+    padding: 1rem 2rem;
+}
+
+.name{
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+.description{
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.duration, .date{
+    font-size: 1rem;
+    color: gray;
+    font-weight: 700;
+}
+
+.delete{
+    color: white;
+    background-color: red;
+    border: none;
+    padding: 0.4rem 0;
+    font-size: 1rem;
+    cursor: pointer;
+}

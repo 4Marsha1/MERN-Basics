@@ -1,0 +1,22 @@
+.blogs{
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+}
+.empty-msg{
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    width: 400px;
+    height: 60px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+@media screen  and (max-width:1400px){
+    .blogs{
+        width: 100%;
+        gap: 1rem;
+    }
+}

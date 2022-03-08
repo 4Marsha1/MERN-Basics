@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: orangered;
+    height: 100vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 2rem 4rem;
+}
+
+.blog-section{
+    width: 90%;
+    padding: 2rem 4rem;
+    display: flex;
+}
+
+@media screen  and (max-width:540px) {
+    .container{
+        padding: 2rem 0.5rem;
+    }
+    .blog-section{
+        width: 100%;
+        padding: 2rem 0.5rem;
+        flex-direction: column-reverse;
+    }
+}
+
+@media (min-width:540px) and (max-width:1400px){
+    .container{
+        padding: 2rem 0.5rem;
+    }
+    .blog-section{
+        width: 100%;
+        padding: 2rem 0.5rem;
+    }    
+}
