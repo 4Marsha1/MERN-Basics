@@ -1,14 +1,16 @@
-import { LOGIN_USER_FAILED, LOGIN_USER_INITIATED, LOGIN_USER_SUCCESS, REGISTER_USER_FAILED, REGISTER_USER_INITIATED, REGISTER_USER_SUCCESS } from "../actions/types"
+import { LOAD_USER_FAILED, LOAD_USER_INITIATED, LOAD_USER_SUCCESS, LOGIN_USER_FAILED, LOGIN_USER_INITIATED, LOGIN_USER_SUCCESS, REGISTER_USER_FAILED, REGISTER_USER_INITIATED, REGISTER_USER_SUCCESS } from "../actions/types"
 
 const initialState = {
     isRegistering: null,
     user: null,
     msg: null,
     isRegistered: null,
-
     isLoggingIn: null,
     loggedUser: null,
-    isLoggedIn: null
+    isLoggedIn: null,
+    isLoading: null,
+    loadedUser: null,
+    isLoaded: null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -57,6 +59,28 @@ const reducer = (state = initialState, action) => {
                 isLoggingIn: false,
                 loggedUser: null,
                 isLoggedIn: false,
+                msg: action.payload.msg
+            }
+        case LOAD_USER_INITIATED:
+            return {
+                ...state,
+                isLoading: true,
+                loadedUser: null,
+                isLoaded: false
+            }
+        case LOAD_USER_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                loadedUser: action.payload,
+                isLoaded: true
+            }
+        case LOAD_USER_FAILED:
+            return {
+                ...state,
+                isLoading: false,
+                loadedUser: null,
+                isLoaded: false,
                 msg: action.payload.msg
             }
         default: return state
