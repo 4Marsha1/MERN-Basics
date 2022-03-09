@@ -4,6 +4,7 @@ import { ReactComponent as UserSVG } from '../icons/user.svg';
 import { ReactComponent as MailSVG } from '../icons/mail.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '../redux/actions/user';
+import { loadGoals } from '../redux/actions/goals';
 
 
 const Dashboard = () => {
@@ -11,17 +12,12 @@ const Dashboard = () => {
     const { token } = state;
 
     const userState = useSelector(state => state.userReducer);
+    const goalState = useSelector(state => state.goalReducer)
     const dispatch = useDispatch();
-
-    const [user, setUser] = useState({ name: '', email: '' });
-    const [goals, setGoals] = useState([]);
 
     useEffect(() => {
         dispatch(loadUser(token))
-        if (userState.isLoaded) {
-            console.log(userState.loadedUser);
-            setUser({ name: userState.loadedUser.name, email: userState.loadedUser.email })
-        }
+        dispatch(loadGoals(token))
     }, [])
 
     return (
@@ -29,28 +25,29 @@ const Dashboard = () => {
             <div className='details'>
                 <div className='detail'>
                     <UserSVG className='svg' />
-                    {user.name}
+                    {userState.loadedUser ? userState.loadedUser.name : ''}
                 </div>
                 <div className='detail'>
                     <MailSVG className='svg' />
-                    {user.email}
+                    {userState.loadedUser ? userState.loadedUser.email : ''}
                 </div>
             </div>
 
             <div className='goals-section'>
                 <div className='goals'>
-                    <div className='goal'>
-                        <span className='text'>GOAL NAME & DETAIL</span>
-                        <button className='edit-btn'>Edit</button>
-                        <button className='del-btn'>Delete</button>
-                    </div>
+                    {
+                        goalState.goals ?
+                            goalState.goals.map((goal, idx) => {
+                                return (
+                                    <div className='goal' key={idx}>
+                                        <span className='text'>{goal.text}</span>
+                                        <button className='edit-btn'>Edit</button>
+                                        <button className='del-btn'>Delete</button>
+                                    </div>
+                                )
+                            }) : ''
+                    }
 
-                    {/* delete  */}
-                    <div className='goal'>
-                        <span className='text'>GOAL NAME & DETAIL</span>
-                        <button className='edit-btn'>Edit</button>
-                        <button className='del-btn'>Delete</button>
-                    </div>
                 </div>
                 <div className='new-goal'>
                     <form className='form'>
