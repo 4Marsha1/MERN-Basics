@@ -1,12 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { registerUser } from '../redux/actions/user';
 
 const Register = () => {
 
     const userState = useSelector(state => state.userReducer);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (userState.isRegistered) {
+            navigate('/dashboard', { state: { token: userState.user.token } })
+        }
+    }, [userState.isRegistered])
 
     const [user, setUser] = useState({ name: '', email: '', password1: '', password2: '' });
     const handleChange = (e) => {

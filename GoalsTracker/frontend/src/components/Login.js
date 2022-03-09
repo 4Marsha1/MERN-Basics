@@ -1,19 +1,19 @@
-import { useEffect } from 'react';
-import { useState } from 'react'
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../redux/actions/user';
 
 const Login = () => {
 
     const userState = useSelector(state => state.userReducer);
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
-    // useEffect(() => {
-    //     if (userState.isLoggedIn) {
-    //         console.log(userState.loggedUser.token);
-    //     }
-    // }, [userState.isLoggedIn])
+    useEffect(() => {
+        if (userState.isLoggedIn) {
+            navigate('/dashboard', { state: { token: userState.loggedUser.token } })
+        }
+    }, [userState.isLoggedIn])
 
     const [user, setUser] = useState({ email: '', password: '' });
     const handleChange = (e) => {
@@ -45,7 +45,7 @@ const Login = () => {
                     />
                     <input
                         className='input'
-                        type="text"
+                        type="password"
                         name="password"
                         value={user.password}
                         placeholder='Password'
