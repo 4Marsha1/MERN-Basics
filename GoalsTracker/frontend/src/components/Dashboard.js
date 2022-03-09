@@ -4,8 +4,7 @@ import { ReactComponent as UserSVG } from '../icons/user.svg';
 import { ReactComponent as MailSVG } from '../icons/mail.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '../redux/actions/user';
-import { loadGoals } from '../redux/actions/goals';
-
+import { createGoal, loadGoals } from '../redux/actions/goals';
 
 const Dashboard = () => {
     const { state } = useLocation();
@@ -15,10 +14,23 @@ const Dashboard = () => {
     const goalState = useSelector(state => state.goalReducer)
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    const loadDetails = () => {
         dispatch(loadUser(token))
         dispatch(loadGoals(token))
+    }
+
+    useEffect(() => {
+        loadDetails()
     }, [])
+
+    const [text, setText] = useState('');
+    const handleChange = (e) => {
+        setText(e.target.value)
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createGoal(text, token, loadDetails))
+    }
 
     return (
         <div className='dashboard'>
@@ -32,14 +44,13 @@ const Dashboard = () => {
                     {userState.loadedUser ? userState.loadedUser.email : ''}
                 </div>
             </div>
-
             <div className='goals-section'>
                 <div className='goals'>
                     {
                         goalState.goals ?
                             goalState.goals.map((goal, idx) => {
                                 return (
-                                    <div className='goal' key={idx}>
+                                    <div className='goal' key={goal._id}>
                                         <span className='text'>{goal.text}</span>
                                         <button className='edit-btn'>Edit</button>
                                         <button className='del-btn'>Delete</button>
@@ -47,11 +58,17 @@ const Dashboard = () => {
                                 )
                             }) : ''
                     }
-
                 </div>
                 <div className='new-goal'>
-                    <form className='form'>
-                        <input className='input' type="text" placeholder='Type your goal' />
+                    <form className='form' onSubmit={handleSubmit}>
+                        <input
+                            className='input'
+                            type="text"
+                            name='text'
+                            value={text}
+                            onChange={handleChange}
+                            placeholder='Type your goal'
+                        />
                         <input className='btn' type="submit" value='Create new goal' />
                     </form>
                 </div>
