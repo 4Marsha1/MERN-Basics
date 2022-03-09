@@ -1,7 +1,20 @@
+import { useEffect } from 'react';
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { loginUser } from '../redux/actions/user';
 
 const Login = () => {
+
+    const userState = useSelector(state => state.userReducer);
+    const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     if (userState.isLoggedIn) {
+    //         console.log(userState.loggedUser.token);
+    //     }
+    // }, [userState.isLoggedIn])
+
     const [user, setUser] = useState({ email: '', password: '' });
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -14,6 +27,7 @@ const Login = () => {
             return;
         }
         console.log(user);
+        dispatch(loginUser(user.email, user.password));
         setUser({ email: '', password: '' })
     }
     return (
