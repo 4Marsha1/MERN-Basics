@@ -4,7 +4,7 @@ import { ReactComponent as UserSVG } from '../icons/user.svg';
 import { ReactComponent as MailSVG } from '../icons/mail.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '../redux/actions/user';
-import { createGoal, loadGoals, updateGoal } from '../redux/actions/goals';
+import { createGoal, deleteGoal, loadGoals, updateGoal } from '../redux/actions/goals';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -41,9 +41,14 @@ const Dashboard = () => {
         e.preventDefault();
         if (isEdit && currentId) {
             dispatch(updateGoal(currentId, currentText, userState.token, loadDetails));
+            setCurrentText('')
         } else {
             dispatch(createGoal(text, userState.token, loadDetails));
+            setText('')
         }
+    }
+    const handleDelete = (id) => {
+        dispatch(deleteGoal(id, userState.token, loadDetails));
     }
 
     return (
@@ -67,7 +72,7 @@ const Dashboard = () => {
                                     <div className='goal' key={goal._id}>
                                         <span className='text'>{goal.text}</span>
                                         <button className='edit-btn' onClick={() => handleEdit(goal._id)}>Edit</button>
-                                        <button className='del-btn'>Delete</button>
+                                        <button className='del-btn' onClick={() => handleDelete(goal._id)}>Delete</button>
                                     </div>
                                 )
                             }) : ''
