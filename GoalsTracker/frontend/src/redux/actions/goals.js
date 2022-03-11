@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { CREATE_GOAL_FAILED, CREATE_GOAL_INITIATED, CREATE_GOAL_SUCCESS, LOAD_GOALS_FAILED, LOAD_GOALS_SUCCESS, LOAD_USER_INITIATED } from "./types"
+import { CREATE_GOAL_FAILED, CREATE_GOAL_INITIATED, CREATE_GOAL_SUCCESS, LOAD_GOALS_FAILED, LOAD_GOALS_SUCCESS, LOAD_USER_INITIATED, UPDATE_GOAL_FAILED, UPDATE_GOAL_INITIATED, UPDATE_GOAL_SUCCESS } from "./types"
 
 export const loadGoals = (token) => (dispatch) => {
     dispatch({
@@ -50,6 +50,32 @@ export const createGoal = (text, token, cb) => (dispatch) => {
         .catch(err => {
             dispatch({
                 type: CREATE_GOAL_FAILED,
+                payload: { msg: err.message }
+            })
+        })
+}
+
+export const updateGoal = (id, token, cb) => (dispatch) => {
+    dispatch({
+        type: UPDATE_GOAL_INITIATED
+    })
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    }
+    axios.put(`http://localhost:5000/api/goals/${id}`, config)
+        .then((res) => {
+            dispatch({
+                type: UPDATE_GOAL_SUCCESS,
+                payload: res.data
+            })
+            cb();
+        })
+        .catch(err => {
+            dispatch({
+                type: UPDATE_GOAL_FAILED,
                 payload: { msg: err.message }
             })
         })

@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as UserSVG } from '../icons/user.svg';
 import { ReactComponent as MailSVG } from '../icons/mail.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '../redux/actions/user';
-import { createGoal, loadGoals } from '../redux/actions/goals';
+import { createGoal, loadGoals, updateGoal } from '../redux/actions/goals';
 
 const Dashboard = () => {
-    const { state } = useLocation();
-    const { token } = state;
-
+    const navigate = useNavigate();
     const userState = useSelector(state => state.userReducer);
     const goalState = useSelector(state => state.goalReducer)
     const dispatch = useDispatch();
 
     const loadDetails = () => {
-        dispatch(loadUser(token))
-        dispatch(loadGoals(token))
+        if (!userState.token) {
+            navigate('/')
+        }
+        dispatch(loadUser(userState.token))
+        dispatch(loadGoals(userState.token))
     }
 
     useEffect(() => {
@@ -24,12 +25,9 @@ const Dashboard = () => {
     }, [])
 
     const [text, setText] = useState('');
-    const handleChange = (e) => {
-        setText(e.target.value)
-    }
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createGoal(text, token, loadDetails))
+        dispatch(createGoal(text, userState.token, loadDetails))
     }
 
     return (
@@ -66,7 +64,7 @@ const Dashboard = () => {
                             type="text"
                             name='text'
                             value={text}
-                            onChange={handleChange}
+                            onChange={(e) => setText(e.target.value)}
                             placeholder='Type your goal'
                         />
                         <input className='btn' type="submit" value='Create new goal' />

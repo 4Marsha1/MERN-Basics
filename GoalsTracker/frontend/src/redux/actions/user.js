@@ -19,7 +19,6 @@ export const registerUser = (name, email, password1, password2) => (dispatch) =>
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Token'
         }
     }
     axios.post('http://localhost:5000/api/users/', data, config)
@@ -48,7 +47,6 @@ export const loginUser = (email, password) => (dispatch) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Token'
         }
     }
     axios.post('http://localhost:5000/api/users/login', data, config)

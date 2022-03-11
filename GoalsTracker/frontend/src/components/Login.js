@@ -11,7 +11,7 @@ const Login = () => {
 
     useEffect(() => {
         if (userState.isLoggedIn) {
-            navigate('/dashboard', { state: { token: userState.loggedUser.token } })
+            navigate('/dashboard')
         }
     }, [userState.isLoggedIn])
 

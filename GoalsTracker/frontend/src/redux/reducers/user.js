@@ -11,6 +11,7 @@ const initialState = {
     isLoading: null,
     loadedUser: null,
     isLoaded: null,
+    token: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +29,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isRegistering: false,
                 user: action.payload,
+                token: action.payload.token,
                 msg: null,
                 isRegistered: true
             }
@@ -51,6 +53,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isLoggingIn: false,
                 loggedUser: action.payload,
+                token: action.payload.token,
                 isLoggedIn: true
             }
         case LOGIN_USER_FAILED:

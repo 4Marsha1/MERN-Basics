@@ -131,3 +131,12 @@
     font-size: 1rem;
     font-weight: 600;
 }
+
+@media (min-width:540px){
+    .goals-section{
+        flex-direction: column-reverse;
+    }
+    .goals{
+        width: 100%;
+    }
+}

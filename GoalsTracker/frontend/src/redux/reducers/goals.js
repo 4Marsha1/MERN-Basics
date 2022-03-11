@@ -1,4 +1,4 @@
-import { CREATE_GOAL_FAILED, CREATE_GOAL_INITIATED, CREATE_GOAL_SUCCESS, LOAD_GOALS_FAILED, LOAD_GOALS_INITIATED, LOAD_GOALS_SUCCESS } from "../actions/types"
+import { CREATE_GOAL_FAILED, CREATE_GOAL_INITIATED, CREATE_GOAL_SUCCESS, LOAD_GOALS_FAILED, LOAD_GOALS_INITIATED, LOAD_GOALS_SUCCESS, UPDATE_GOAL_FAILED, UPDATE_GOAL_INITIATED, UPDATE_GOAL_SUCCESS } from "../actions/types"
 
 const initialState = {
     loadingGoals: null,
@@ -8,7 +8,11 @@ const initialState = {
 
     creatingGoal: null,
     goal: null,
-    isGoalCreated: null
+    isGoalCreated: null,
+
+    updatingGoal: null,
+    updatedGoal: null,
+    isGoalUpdated: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -57,6 +61,28 @@ const reducer = (state = initialState, action) => {
                 creatingGoal: false,
                 goal: null,
                 isGoalCreated: false,
+                msg: action.payload.msg
+            }
+        case UPDATE_GOAL_INITIATED:
+            return {
+                ...state,
+                updatingGoal: true,
+                updatedGoal: null,
+                isGoalUpdated: null,
+            }
+        case UPDATE_GOAL_SUCCESS:
+            return {
+                ...state,
+                updatedGoal: false,
+                updatedGoal: action.payload,
+                isGoalUpdated: true,
+            }
+        case UPDATE_GOAL_FAILED:
+            return {
+                ...state,
+                updatingGoal: false,
+                updatedGoal: null,
+                isGoalUpdated: false,
                 msg: action.payload.msg
             }
         default: return state

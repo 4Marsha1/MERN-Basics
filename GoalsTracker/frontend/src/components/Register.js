@@ -11,7 +11,7 @@ const Register = () => {
 
     useEffect(() => {
         if (userState.isRegistered) {
-            navigate('/dashboard', { state: { token: userState.user.token } })
+            navigate('/dashboard')
         }
     }, [userState.isRegistered])
 
