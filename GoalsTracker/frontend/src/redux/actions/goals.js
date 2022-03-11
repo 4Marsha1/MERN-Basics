@@ -55,17 +55,20 @@ export const createGoal = (text, token, cb) => (dispatch) => {
         })
 }
 
-export const updateGoal = (id, token, cb) => (dispatch) => {
+export const updateGoal = (id, text, token, cb) => (dispatch) => {
     dispatch({
         type: UPDATE_GOAL_INITIATED
     })
+    const data = {
+        text: text
+    }
     const config = {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
     }
-    axios.put(`http://localhost:5000/api/goals/${id}`, config)
+    axios.put(`http://localhost:5000/api/goals/${id}`, data, config)
         .then((res) => {
             dispatch({
                 type: UPDATE_GOAL_SUCCESS,

@@ -50,6 +50,7 @@
     border: none;
     font-size: 1.2rem;
     font-weight: 500;
+    cursor: pointer;
 }
 .redirect{
     color: blueviolet;
@@ -90,7 +91,7 @@
 }
 .new-goal{
     width: 500px;
-    max-height: 150px;
+    max-height: 200px;
     padding: 2rem 4rem;
     background-color: white;
 }
@@ -122,6 +123,7 @@
     border: none;
     font-size: 1rem;
     font-weight: 600;
+    cursor: pointer;
 }
 .del-btn{
     background-color: red;
@@ -130,9 +132,20 @@
     border: none;
     font-size: 1rem;
     font-weight: 600;
+    cursor: pointer;
+}
+.close-update{
+    width: 60px;
+    align-self: flex-end;
+    background: black;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border: none;
 }
 
-@media (min-width:540px){
+@media screen and (max-width:900px){
     .goals-section{
         flex-direction: column-reverse;
     }

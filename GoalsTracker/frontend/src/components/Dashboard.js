@@ -21,13 +21,29 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        loadDetails()
+        loadDetails();
     }, [])
 
     const [text, setText] = useState('');
+    const [isEdit, setIsEdit] = useState(false);
+    const [currentId, setCurrentId] = useState(null);
+    const [currentText, setCurrentText] = useState('');
+
+    const handleEdit = (id) => {
+        setIsEdit(true);
+        if (isEdit) {
+            setCurrentId(id);
+            const currentGoal = goalState.goals.filter(goal => goal._id === id);
+            setCurrentText(currentGoal[0].text);
+        }
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createGoal(text, userState.token, loadDetails))
+        if (isEdit && currentId) {
+            dispatch(updateGoal(currentId, currentText, userState.token, loadDetails));
+        } else {
+            dispatch(createGoal(text, userState.token, loadDetails));
+        }
     }
 
     return (
@@ -50,7 +66,7 @@ const Dashboard = () => {
                                 return (
                                     <div className='goal' key={goal._id}>
                                         <span className='text'>{goal.text}</span>
-                                        <button className='edit-btn'>Edit</button>
+                                        <button className='edit-btn' onClick={() => handleEdit(goal._id)}>Edit</button>
                                         <button className='del-btn'>Delete</button>
                                     </div>
                                 )
@@ -59,15 +75,30 @@ const Dashboard = () => {
                 </div>
                 <div className='new-goal'>
                     <form className='form' onSubmit={handleSubmit}>
-                        <input
-                            className='input'
-                            type="text"
-                            name='text'
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                            placeholder='Type your goal'
-                        />
-                        <input className='btn' type="submit" value='Create new goal' />
+                        {isEdit ?
+                            <>
+                                <button className='close-update' onClick={() => setIsEdit(false)}>&times;</button>
+                                <input
+                                    className='input'
+                                    type="text"
+                                    name='currentText'
+                                    value={currentText}
+                                    onChange={(e) => setCurrentText(e.target.value)}
+                                    placeholder='Type your goal'
+                                />
+                                <input className='btn' type="submit" value='Update Goal' />
+                            </> :
+                            <>
+                                <input
+                                    className='input'
+                                    type="text"
+                                    name='text'
+                                    value={text}
+                                    onChange={(e) => setText(e.target.value)}
+                                    placeholder='Type your goal'
+                                />
+                                <input className='btn' type="submit" value='Create new goal' />
+                            </>}
                     </form>
                 </div>
             </div>
