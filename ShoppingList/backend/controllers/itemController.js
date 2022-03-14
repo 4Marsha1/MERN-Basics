@@ -22,12 +22,12 @@ const createItem = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error('Unauthorized');
     }
-    const { name, desc, price, state, city } = req.body;
-    if (!name || !desc || !price || !state || !city) {
+    const { name, desc, price, state, city, image } = req.body;
+    if (!name || !desc || !price || !state || !city || !image) {
         res.status(400);
         throw new Error('Incomplete Fields!');
     }
-    const item = new Item({ name, desc, price, state, city });
+    const item = new Item({ name, desc, price, state, city, image });
     await item.save();
     if (item) {
         res.status(200).json(item)
@@ -45,8 +45,8 @@ const updateItem = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error('Unauthorized');
     }
-    const { name, desc, price, state, city } = req.body;
-    if (!name || !desc || !price || !state || !city) {
+    const { name, desc, price, state, city, image } = req.body;
+    if (!name || !desc || !price || !state || !city || !image) {
         res.status(400);
         throw new Error('Incomplete Fields!');
     }
@@ -57,7 +57,7 @@ const updateItem = asyncHandler(async (req, res) => {
         throw new Error('Item not found');
     }
     const updatedItem = await Item.findByIdAndUpdate(id, {
-        name, desc, price, state, city
+        name, desc, price, state, city, image
     }, { new: true })
     if (updatedItem) {
         res.status(200).json(updatedItem)

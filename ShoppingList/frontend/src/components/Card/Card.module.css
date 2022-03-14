@@ -31,6 +31,26 @@
     color: gray;
 }
 
+.btns{
+    display: flex;
+    justify-content: space-between;
+}
+.btn{
+    background: none;
+    border: none;
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+}
+.btn:nth-child(1){
+    background-color: aquamarine;
+}.btn:nth-child(2){
+    background-color: red;
+    color: white;
+}
+
 @media screen  and (max-width:540px){
     .card{
         width: 100%;

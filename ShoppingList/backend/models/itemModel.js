@@ -24,6 +24,7 @@ const itemSchema = new Schema({
     },
     image: {
         type: String,
+        required: true
     }
 }, { timestamps: true })
 

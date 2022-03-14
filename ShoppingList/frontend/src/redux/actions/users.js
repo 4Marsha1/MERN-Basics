@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_USER_FAILED, LOGIN_USER_INITIATED, LOGIN_USER_SUCCESS, REGISTER_USER_FAILED, REGISTER_USER_INITIATED, REGISTER_USER_SUCCESS } from './types';
+import { LOGIN_USER_FAILED, LOGIN_USER_INITIATED, LOGIN_USER_SUCCESS, LOGOUT_USER, REGISTER_USER_FAILED, REGISTER_USER_INITIATED, REGISTER_USER_SUCCESS } from './types';
 
 export const loginUser = (email, password) => dispatch => {
     dispatch({
@@ -62,4 +62,10 @@ export const registerUser = (name, email, password1, password2) => dispatch => {
                 payload: err.message
             })
         })
+}
+
+export const logoutUser = () => dispatch => {
+    dispatch({
+        type: LOGOUT_USER
+    })
 }
