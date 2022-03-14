@@ -41,14 +41,44 @@ const registerUser = asyncHandler(async (req, res) => {
 // @Desc            Authenticate User
 // @Access          PUBLIC
 const loginUser = asyncHandler(async (req, res) => {
-    res.send('Login User Controller')
+    const { email, password } = req.body;
+    if (!email || !password) {
+        res.status(400);
+        throw new Error('Incomplete Fields');
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+        res.status(400);
+        throw new Error("User doesn't Exist");
+    }
+    const verify = await bcrypt.compare(password, user.password);
+    if (verify) {
+        res.json({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            token: generateToken(user.id)
+        })
+    } else {
+        res.status(400);
+        throw new Error("Unauthorised")
+    }
 })
 
 // @Route           /api/users/me
 // @Desc            Load user based on token
 // @Access          PRIVATE
 const getUser = asyncHandler(async (req, res) => {
-    res.send('Get User Controller')
+    const user = req.user;
+    if (!user) {
+        res.status(400);
+        throw new Error('Unauthorised')
+    }
+    res.status(200).json({
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email
+    })
 })
 
 const generateToken = (id) => {
