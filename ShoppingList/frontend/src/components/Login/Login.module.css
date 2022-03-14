@@ -1,0 +1,37 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.form{
+    width: 50%;
+    background-color: #850bff;
+    border-radius: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 4rem;
+}
+.form>input{
+    padding: 0.4rem 2rem;
+    font-size: 1rem;
+    outline: none;
+}
+.btn{
+    background-color: #333;
+    color: white;
+    border-radius: 0.4rem;
+    border: none;
+    cursor: pointer;
+}
+.redirect{
+    color: lightgray;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+}
+.redirect:hover{
+    text-decoration: underline;
+}
