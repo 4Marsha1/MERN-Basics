@@ -35,3 +35,16 @@
 .redirect:hover{
     text-decoration: underline;
 }
+
+@media screen  and (max-width:540px){
+    .form{
+        width: 90%;
+        padding: 2rem 2rem;
+    }
+}
+@media (min-width:540px)  and (max-width:900px){
+    .form{
+        width: 60%;
+        padding: 2rem 2rem;
+    }
+}
