@@ -24,7 +24,10 @@ const Login = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(user)
+        if (!user.email || !user.password) {
+            alert('Incomplete Fields!');
+            return;
+        }
         dispatch(loginUser(user.email, user.password));
         setUser({ email: '', password: '' })
     }

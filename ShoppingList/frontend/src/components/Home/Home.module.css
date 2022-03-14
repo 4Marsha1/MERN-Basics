@@ -42,7 +42,7 @@
 
 @media screen and (max-width:540px) {
     .navbar{
-        padding: 1rem 0.5rem;
+        padding: 1rem 1rem;
     }
     .logo{
         font-size: 1.8rem;
@@ -53,7 +53,7 @@
 }
 @media (min-width:540px) and (max-width:900px) {
     .navbar{
-        padding: 1rem 0.5rem;
+        padding: 1rem 2rem;
     }
     .logo{
         font-size: 1.8rem;
