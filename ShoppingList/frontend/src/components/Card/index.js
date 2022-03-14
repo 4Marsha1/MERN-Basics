@@ -1,14 +1,16 @@
 import styles from './Card.module.css';
 
-const Card = () => {
+const Card = ({ card }) => {
     return (
         <div className={styles['card']}>
-            <img className={styles['img']} src="https://picsum.photos/200" alt="" />
+            {card.image ? <img className={styles['img']} src={card.image} alt="" /> :
+                <img className={styles['img']} src="https://picsum.photos/200" alt="" />}
+
             <div className={styles['content']}>
-                <span className={styles['name']}>Product Name</span>
-                <span className={styles['desc']}>Product Desc</span>
-                <span className={styles['price']}>Product Price</span>
-                <span className={styles['locations']}>Product Location</span>
+                <span className={styles['name']}>{card.name}</span>
+                <span className={styles['desc']}>{card.desc}</span>
+                <span className={styles['price']}>₹ {card.price}</span>
+                <span className={styles['location']}>{card.city}, {card.state}</span>
             </div>
         </div>
     )

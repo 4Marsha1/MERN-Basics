@@ -26,5 +26,5 @@ app.use(errorHandler);
 
 // SETTING UP APP
 app.listen(port, () => {
-    console.log(`Server listening at port ${port}`.yellow.underline);
+    console.log(`Server listening at port ${port}`.white.underline);
 })
