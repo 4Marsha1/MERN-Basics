@@ -32,8 +32,8 @@ const Home = () => {
 
             <main className={styles['cards']}>
                 {
-                    itemState.items && itemState.items.map(item => {
-                        return <Card key={item.id} card={item} />
+                    itemState.items && itemState.items.map((item, idx) => {
+                        return <Card key={idx} card={item} />
                     })
                 }
             </main>
