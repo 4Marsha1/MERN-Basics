@@ -17,7 +17,7 @@ const protect = asyncHandler(async (req, res, next) => {
     } catch (err) {
         console.log(err.message)
         res.status(401);
-        throw new Error('User Unathorised');
+        throw new Error('User Unauthorised');
     }
 })
 

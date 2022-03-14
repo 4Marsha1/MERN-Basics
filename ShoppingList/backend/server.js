@@ -16,8 +16,10 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES
-const userRoutes = require('./Routes/userRoutes')
+const userRoutes = require('./Routes/userRoutes');
+const itemRoutes = require('./Routes/itemRoutes');
 app.use('/api/users', userRoutes);
+app.use('/api/items', itemRoutes);
 
 // ERROR HANDLER
 app.use(errorHandler);
