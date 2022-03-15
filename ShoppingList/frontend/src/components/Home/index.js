@@ -34,7 +34,7 @@ const Home = () => {
             <nav className={styles['navbar']}>
                 <span className={styles['logo']}>ShopIt</span>
                 <div className={styles['links']}>
-                    <Link to='/' className={styles['link']}>Cart</Link>
+                    <Link to='/mycart' className={styles['link']}>My Cart</Link>
                     {userState.token ? <button onClick={() => dispatch(logoutUser())} className={styles['link']}>Logout</button> :
                         <Link to='/login' className={styles['link']}>Login</Link>}
                 </div>
@@ -43,7 +43,10 @@ const Home = () => {
             <main className={styles['cards']}>
                 {
                     itemState.items && itemState.items.map((item, idx) => {
-                        if (userState.loggedUser && userState.loggedUser.id === '622edcbb479e4a21ee89f948') {
+                        if (!userState.loggedUser) {
+                            return <Card key={idx} card={item} userType={2} />
+                        }
+                        else if (userState.loggedUser && userState.loggedUser.id === '622edcbb479e4a21ee89f948') {
                             return <Card
                                 key={idx}
                                 card={item}

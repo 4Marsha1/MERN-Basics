@@ -26,8 +26,8 @@ const Card = ({ card, userType, toggleModal, refresh }) => {
                             <>
                                 <button className={styles['btn']} onClick={() => toggleModal('edit', card)}>Edit Item</button>
                                 <button className={styles['btn']} onClick={() => deleteCard(card._id)}>Delete Item</button>
-                            </> :
-                            <button className={styles['btn']}>Add to Cart</button>
+                            </> : userType === 1 ?
+                                <button className={styles['btn']}>Add to Cart</button> : <></>
                     }
                 </div>
             </div>

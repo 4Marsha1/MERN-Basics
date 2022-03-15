@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem 4rem;
+}
+.back-btn{
+    background-color: #131213;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.info{
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: #ccc;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0.4rem;
+}

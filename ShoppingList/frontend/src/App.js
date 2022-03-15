@@ -5,6 +5,7 @@ import store from './redux/store';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
+import MyCart from './components/MyCart';
 
 function App() {
     return (
@@ -28,6 +29,12 @@ function App() {
                         exact
                         element={<Register />}
                         key='route-register-screen'
+                    />
+                    <Route
+                        path='/mycart'
+                        exact
+                        element={<MyCart />}
+                        key='route-cart-screen'
                     />
                 </Routes>
             </BrowserRouter>
